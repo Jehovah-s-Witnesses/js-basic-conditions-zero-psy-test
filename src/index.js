@@ -13,7 +13,7 @@ const categoryIds = {
   last: 12,
 };
 
-const questionsNew = [
+const psyQuestions = [
   {
     text: 'Я обуза для других',
     category: categoryIds.first,
@@ -271,12 +271,24 @@ const results = {
   [categoryIds.last]: 0,
 };
 
-questionsNew.forEach((question) => {
-  const result = +prompt(question.text);
+outer: for (let i = 0; i < psyQuestions.length; i += 1) {
+  let newQuestion;
+  do {
+    const userInput = prompt(psyQuestions[i].text);
 
-  results[question.category] += result;
-  console.log(result);
-});
+    if (userInput === null || userInput === '') {
+      alert('You cancelled operation');
+      break outer;
+    }
+
+    newQuestion = +userInput;
+
+    if (isFinite(newQuestion) && newQuestion >= 0) {
+      results[psyQuestions[i].category] += newQuestion;
+      break;
+    }
+  } while (true);
+}
 
 let output = 'Problem detected in categories:\n';
 
@@ -286,5 +298,4 @@ for (const category in results) {
   }
 }
 
-//alert(output);
-
+alert(output);
