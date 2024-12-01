@@ -294,7 +294,7 @@ let output = 'Problem detected in categories:\n';
 
 for (const category in results) {
   if (results[category] >= 30) {
-    output = `${output} - Category ${category}: ${results[category]}`;
+    output = `${output} - Category ${category}: Score ${results[category]}`;
   }
 }
 
